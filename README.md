@@ -1,2 +1,2 @@
 # fmi-OS
-A repository for Operating Systems course @FMI
+A repository for the Operating Systems course @FMI
