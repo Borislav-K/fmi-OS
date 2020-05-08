@@ -20,8 +20,8 @@ do
 	PROPORTION="inf"
 	if [ ${VSZ} -ne 0 ]
 	then
-		#PROPORTION=$(echo "${RSS}/${VSZ}" | bc)
-		PROPORTION=$(echo "${RSS} ${VSZ}" | awk '{print $1/$2}')
+		PROPORTION=$(echo "scale =2; ${RSS}/${VSZ}" | bc)
+		#PROPORTION=$(echo "${RSS} ${VSZ}" | awk '{print $1/$2}')
 	fi
 	echo "PID: ${PID} RSS/VSZ: ${PROPORTION}"
 done < <(ps -eu "${1}" -o pid,rss,vsz | tail -n +2 | sort -nrk 3)
