@@ -39,9 +39,15 @@ fi
 
 if [ "${SHOW_HIDDEN}" = "t" ]
 	then
-	echo "Listing all: "
-	find "${1}" -mindepth 1 -type f -o -type d 2>/dev/null
+	FILES=$(find "${1}" -mindepth 1 -maxdepth 1 -type f 2>/dev/null -exec stat -c "%n (%s bytes)" {} \;)
+	DIRECTORIES=$(find "${1}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | tr '\n' ' ') 
 else
-	echo "Listing only non-hidden: " 
-	find "${1}" -mindepth 1 -type f -o -type d 2>/dev/null | egrep -v "${1}/\."
+	FILES=$(find "${1}" -mindepth 1 -maxdepth 1 -type f 2>/dev/null -exec stat -c "%n (%s bytes)" {} \; | egrep -v "${1}/\.")
+	DIRECTORIES=$(find "${1}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | egrep -v "${1}/\." | tr '\n' ' ')
 fi
+for DIR in ${DIRECTORIES}
+do
+	ENTRIES=$(find "${DIR}" -mindepth 1 -maxdepth 1 -type f -o -type d 2>/dev/null| sed -r "s/.*\/(.*)/\1/" | egrep -v "^\." | wc -l)
+	echo "${DIR} (${ENTRIES} entries)"
+done
+echo "${FILES}"
