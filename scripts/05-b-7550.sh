@@ -8,7 +8,7 @@ then
 	exit 1
 fi
 
-who | awk '{print $1}' | grep "${1}"
+who | awk '{print $1}' | grep "^${1}$"
 if [ $? -ne 0 ]
 then
 	echo "$1 is currently not logged"
