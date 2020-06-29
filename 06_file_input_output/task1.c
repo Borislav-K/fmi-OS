@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 	while(1) {
 		int bytes=read(fd1,&buf,1);
 		if(bytes==0) {
+			write(1,'\n',1);
 			break;
 		}
 		if(bytes==-1) {
