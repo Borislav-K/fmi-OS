@@ -144,5 +144,8 @@ int main(int argc, char* argv[]) {
 	close(fd2);
 	close(fd3);
 
-	unlink("my-tmp-file");
+	if(unlink("my-tmp-file")==-1) {
+		warnx("Warning: Could not delete the temporary file my-temp-file");
+	}
+	exit(0);
 }
