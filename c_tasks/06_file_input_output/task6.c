@@ -1,3 +1,4 @@
+//Реализирайте команда cat, работеща с произволен брой подадени входни параметри.
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
