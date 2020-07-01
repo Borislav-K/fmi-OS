@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 	
 	//copy argv[1]-->tmpfile
 	while(1) {
-		int rbytes=read(fd1,&buf,sizeof(buf));
+		int rbytes=read(fd1,buf,sizeof(buf));
 		if(rbytes==-1) {
 			const int olderrno=errno;
 			close(fd1);
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 		if(rbytes==0) {
 			break;//Finished reading
 		}
-		int wbytes=write(fd3,&buf,rbytes);
+		int wbytes=write(fd3,buf,rbytes);
 		if(wbytes==-1) {
 			const int olderrno=errno;
 			close(fd1);
